@@ -1,0 +1,144 @@
+---
+// src/pages/about.astro
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import ContactSocial from '../components/ContactSocial.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Tentang Komunitas Hattrick Game Manager Indonesia" 
+  description="Kenali Hattrick Manager Journal, website komunitas Hattrick Indonesia yang berisi tutorial, strategi, sejarah klub, cerita komunitas, dan panduan aksesibilitas bagi pemain Hattrick."
+>
+  
+  <div class="small-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/banner.webp');"></div>
+
+  <Navbar />
+
+  <main id="main-content" class="container about-layout">
+    <article class="about-content">
+      
+      <header class="about-header">
+        <h1>Tentang Kami</h1>
+      </header>
+<h2>Website Komunitas untuk Berbagi dan Belajar Bersama</h2>
+
+<p>
+  Terima kasih sudah berkunjung ke sini!
+</p>
+
+<p>
+  Website komunitas ini lahir dari semangat kebersamaan para manajer Hattrick yang ingin memiliki tempat untuk berbagi pengalaman, pengetahuan, dan cerita seputar dunia <strong>game football manager Hattrick</strong>.
+</p>
+
+<p>
+  Awalnya, situs ini digagas oleh <strong>Gus Ghele</strong>, manajer <strong>FC Selayar Munchen</strong>, bersama <strong>Andhim</strong>, manajer <strong>Lancang Kuning FC</strong>. Dalam perjalanannya, website ini juga mendapat dukungan dari para anggota komunitas yang turut memberikan ide, masukan, dan berbagi pengalaman mereka.
+</p>
+
+<p>
+  Bermain Hattrick bukan hanya soal menang atau kalah. Selain bisa berfantasi menjadi seorang sultan yang memiliki klub sepak bola dengan dana miliaran, terkadang justru cerita-cerita lucu, kejadian tak terduga, hingga kesalahan konyol saat mengatur tim menjadi kenangan yang paling berkesan.
+</p>
+
+<h3>Apa yang Bisa Kamu Temukan di Sini?</h3>
+
+<ul>
+  <li><strong>Tutorial & Panduan:</strong> Belajar dasar hingga strategi lanjutan bermain Hattrick.</li>
+  <li><strong>Training & Taktik:</strong> Tips mengembangkan pemain, menyusun formasi, dan mengelola klub.</li>
+  <li><strong>Sejarah Klub:</strong> Perjalanan klub, turnamen, dan kisah para manajer Hattrick Indonesia.</li>
+  <li><strong>Cerita Konyol:</strong> Pengalaman lucu, momen tak terduga, dan kisah unik dari komunitas.</li>
+  <li><strong>Tips Bermain:</strong> Berbagai informasi yang dapat membantu manajer baru maupun pemain lama.</li>
+</ul>
+
+<h3>Aksesibilitas untuk Semua</h3>
+
+<p>
+  Kami juga memiliki perhatian khusus terhadap <strong>aksesibilitas</strong>. Salah satu tujuan website ini adalah membantu pemain Hattrick yang memiliki disabilitas penglihatan agar dapat menikmati permainan dengan lebih mudah melalui panduan, informasi, dan berbagai solusi yang ramah aksesibilitas.
+</p>
+
+<p class="closing">
+  Pada akhirnya, website ini dibuat dengan tujuan sederhana: <strong>bersenang-senang, berbagi, dan belajar bersama.</strong> Semoga setiap postingan yang kami bagikan dapat menambah wawasan, menghibur, serta mempererat persaudaraan di komunitas Hattrick Indonesia.<br /><br />
+  <strong>Selamat membaca 😉</strong><br />
+  Salam Hattrickers!
+</p>
+    </article>
+  </main>
+
+  <ContactSocial />
+  <Footer />
+</Layout>
+
+<style>
+  /* Banner atas murni gambar polos, membersihkan float */
+  .small-banner {
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    clear: both;
+    position: relative;
+  }
+
+  .about-layout {
+    padding-top: 2.5rem;
+    padding-bottom: 4rem;
+    max-width: 800px; /* Dipersempit agar baris teks nyaman dibaca mata */
+  }
+
+  /* KOREKSI: Gaya kotak hitam disematkan langsung ke kelas .about-header h1 */
+  .about-header h1 {
+    font-size: 1.6rem; 
+    line-height: 1.4; 
+    color: #ffffff; 
+    background-color: #111827;
+    padding: 1.5rem 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (min-width: 768px) {
+    .about-header h1 { font-size: 2.25rem; padding: 2rem 1.5rem; }
+  }
+
+  .about-content h2 {
+    font-size: 1.6rem;
+    color: var(--color-text);
+    margin-bottom: 1.25rem;
+    line-height: 1.4;
+  }
+
+  .about-content h3 {
+    font-size: 1.35rem;
+    color: var(--color-text);
+    margin: 2.5rem 0 1rem 0;
+  }
+
+  .about-content p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #2d3748;
+    margin-bottom: 1.25rem;
+  }
+
+  .about-content ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .about-content li {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+    color: #2d3748;
+  }
+
+  .closing {
+    margin-top: 2.5rem;
+    padding: 1.25rem;
+    border-left: 4px solid var(--color-primary);
+    background-color: #f9fafb;
+    font-style: italic;
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+</style>

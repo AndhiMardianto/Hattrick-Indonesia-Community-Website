@@ -1,0 +1,220 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import ContactSocial from '../../components/ContactSocial.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection('blog');
+  return blogPosts.map(post => ({
+    params: { slug: post.slug },
+    props: { post, allPosts: blogPosts },
+  }));
+}
+
+const { post, allPosts } = Astro.props;
+const { Content } = await post.render();
+
+// Rekomendasi bacaan (ambil 2 artikel selain artikel aktif saat ini)
+const recommendations = allPosts
+  .filter(p => p.slug !== post.slug)
+  .slice(0, 2);
+
+const currentFullUrl = `https://hattrick.web.id/blog/${post.slug}`;
+---
+
+<Layout title={post.data.title} description={post.data.description} image={post.data.thumbnail} canonicalUrl={currentFullUrl}>
+  
+  <div class="small-banner" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/banner.webp');"></div>
+
+  <Navbar />
+
+  <main id="main-content" class="container article-layout">
+    <article>
+      <header class="article-header">
+        <h1>{post.data.title}</h1>
+        
+        <div class="meta-info">
+          <div class="meta-item">Penulis: <strong>{post.data.author}</strong></div>
+          <div class="meta-item">Dipublikasikan: {post.data.publishDate}</div>
+        </div>
+
+        <hr class="header-divider" />
+      </header>
+
+      <div class="article-body">
+        <Content />
+      </div>
+
+      <div class="share-box">
+        <span>Bagikan Postingan ini</span>
+        <a href={`https://api.whatsapp.com/send?text=${encodeURIComponent(post.data.title + ' ' + currentFullUrl)}`} target="_blank" rel="noopener" class="share-btn wa">WhatsApp</a>
+        <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentFullUrl)}`} target="_blank" rel="noopener" class="share-btn fb">Facebook</a>
+      </div>
+    </article>
+
+    {recommendations.length > 0 && (
+      <section class="recommendations-section" aria-label="rekomendasi postingan">
+        <h2>Rekomendasi Postingan Lainnya</h2>
+        <div class="rec-grid">
+          {recommendations.map(rec => (
+            <div class="rec-card">
+              <img src={rec.data.thumbnail} alt="" class="rec-thumb" />
+              <div class="rec-content">
+                <h3><a href={`/blog/${rec.slug}`}>{rec.data.title}</a></h3>
+                <p>{rec.data.description.slice(0, 75)}...</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+  </main>
+
+  <ContactSocial />
+  <Footer />
+</Layout>
+
+<style>
+  /* Menghilangkan sisa gap dan memastikan banner membersihkan area float */
+  .small-banner { 
+    height: 160px; 
+    background-size: cover; 
+    background-position: center; 
+    clear: both;
+    position: relative;
+  }
+  
+  .article-layout { padding-top: 2.5rem; padding-bottom: 4rem; max-width: 800px; }
+  
+  .article-header { 
+    padding-bottom: 0.5rem; 
+    margin-bottom: 1.5rem; 
+  }
+  
+  /* Desain Judul Utama: Kotak Hitam, Teks Putih Tebal, Center */
+  .article-header h1 { 
+    font-size: 1.6rem; 
+    line-height: 1.4; 
+    color: #ffffff; 
+    background-color: #111827;
+    padding: 1.5rem 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (min-width: 768px) {
+    .article-header h1 { font-size: 2.25rem; padding: 2rem 1.5rem; }
+  }
+
+  /* Meta Informasi */
+  .meta-info {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+  
+  .meta-item {
+    margin: 0 0 0.25rem 0;
+    padding: 0;
+    display: block;
+  }
+
+  .meta-item strong {
+    color: var(--color-text);
+  }
+
+  /* Garis Horizontal Pemisah Konten */
+  .header-divider {
+    border: 0;
+    height: 1px;
+    background-color: var(--color-border);
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+  
+  .article-body { font-size: 1.1rem; line-height: 1.7; color: #2d3748; margin-bottom: 3rem; }
+  
+  /* Menata gaya elemen di dalam artikel hasil render MDX */
+  .article-body :global(p) { margin-bottom: 1.25rem; }
+  .article-body :global(h2) { margin: 2rem 0 1rem 0; font-size: 1.6rem; }
+  /* Gambar di dalam artikel */
+  .article-body :global(img) {
+  display: block;
+  width: 100%;
+  max-width: 650px;
+  height: auto;
+  margin: 2rem auto;
+  border-radius: 0.5rem;
+}
+
+  /* Tombol bagikan adaptif */
+  .share-box { 
+    padding: 1.5rem; 
+    border: 1px solid var(--color-border); 
+    border-radius: 0.5rem; 
+    background: #f9fafb; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 1rem; 
+  }
+  
+  @media (min-width: 600px) {
+    .share-box { 
+      flex-direction: row; 
+      align-items: center; 
+    }
+  }
+
+  .share-btn { 
+    padding: 0.5rem 1rem; 
+    text-decoration: none; 
+    color: white; 
+    border-radius: 0.25rem; 
+    font-weight: bold; 
+    font-size: 0.9rem; 
+    display: inline-block;
+  }
+  .share-btn.wa { background-color: #25d366; }
+  .share-btn.fb { background-color: #1877f2; }
+
+  /* --- Sektor Rekomendasi --- */
+  .recommendations-section { 
+    margin-top: 4rem; 
+    border-top: 2px solid var(--color-border); 
+    padding-top: 2rem; 
+  }
+
+  /* Desain Baru Judul Rekomendasi: Kotak Hijau Lapangan, Teks Putih Tebal, Center */
+  .recommendations-section h2 { 
+    font-size: 1.4rem;
+    line-height: 1.4;
+    color: #ffffff;
+    background-color: #15803d; 
+    padding: 1.25rem 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (min-width: 768px) {
+    .recommendations-section h2 { font-size: 1.75rem; padding: 1.5rem 1rem; }
+  }
+
+  .rec-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+  @media (min-width: 600px) { .rec-grid { grid-template-columns: 1fr 1fr; } }
+  .rec-card { display: flex; flex-direction: column; border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden; }
+  .rec-thumb { width: 100%; height: 130px; object-fit: cover; }
+  .rec-content { padding: 1rem; }
+  .rec-content h3 a { color: var(--color-text); text-decoration: none; font-size: 1.1rem; }
+  .rec-content p { font-size: 0.85rem; color: var(--color-muted); margin-top: 0.25rem; }
+</style>

@@ -1,0 +1,45 @@
+# Perjalanan Saya Bersama Hattrick: Dari Seorang Pemula Hingga Membangun Mimpi
+
+Kalau ada yang bertanya sejak kapan saya mengenal Hattrick, jawabannya adalah pada tahun 2023. Saat itu saya dikenalkan oleh seorang teman, manajer Selayar Munchen, Agoez Ghele. Kami berada dalam satu grup WhatsApp bertema teknologi. Dari sanalah saya mulai mengenal sebuah game sepak bola yang ternyata sangat berbeda dari game sepak bola pada umumnya.
+
+Sebagai penggemar sepak bola, awalnya saya mengira Hattrick hanyalah game simulasi manajemen biasa. Namun setelah memainkannya, saya menyadari bahwa Hattrick menawarkan pengalaman yang jauh lebih unik.
+
+Game ini berbasis teks. Tidak ada animasi pertandingan yang ramai atau aksi pemain yang bergerak di layar. Sebaliknya, saya diajak berpikir sebagai seorang pemilik klub sepak bola. Setiap minggu saya menerima laporan pertandingan, laporan keuangan, perkembangan pemain, hingga berbagai keputusan yang harus diambil. Rasanya seperti menjadi seorang sultan yang memiliki sebuah klub sepak bola dan menerima laporan lengkap dari staf setiap pekan.
+
+Hal lain yang membuat saya betah adalah karena Hattrick tidak menyita banyak waktu. Saya tidak harus online setiap hari selama berjam-jam. Yang lebih penting adalah bagaimana saya menganalisis situasi, menyusun strategi, dan mengambil keputusan yang tepat. Menurut saya, Hattrick juga merupakan game yang adil karena keberhasilan lebih banyak ditentukan oleh kemampuan mengelola klub daripada sekadar seberapa lama kita bermain.
+
+Perjalanan saya tentu tidak langsung berjalan mulus.
+
+Klub pertama saya bernama Lancang Kuning FC. Sayangnya, karena masih menjadi pemain baru, saya melakukan banyak kesalahan hingga akhirnya klub tersebut bangkrut. Saat itu saya belajar bahwa menjadi manajer Hattrick bukan hanya soal menyusun formasi, tetapi juga tentang mengelola keuangan, merencanakan masa depan, dan mengambil keputusan dengan hati-hati.
+
+Beruntung, saya mendapat bantuan dari teman saya, manajer Selayar Munchen, yang memberikan sebuah klub baru bernama Bonsal FC. Klub tersebut sudah berdiri sekitar satu tahun. Saya kemudian memindahkan lokasi klub dari Sulawesi Selatan ke Riau dan mengganti namanya menjadi Pekanbaru City.
+
+Kini, menjelang berakhirnya musim sekaligus berakhirnya Turnamen Blind Kontingen Volume 4 tahun 2026, saya memutuskan untuk mengembalikan identitas klub tersebut ke nama yang memiliki makna khusus bagi saya. Nama Pekanbaru City resmi saya tinggalkan, dan klub ini kembali menggunakan nama Lancang Kuning FC.
+
+Bagi saya, ini bukan sekadar pergantian nama. Ini adalah awal dari sebuah perjalanan baru.
+
+Namun jika ditanya apa momen yang paling berkesan selama bermain Hattrick, jawabannya justru bukan promosi, trofi, ataupun transfer pemain.
+
+Yang paling membekas adalah komunitasnya.
+
+Saya bertemu banyak orang dengan latar belakang yang sangat beragam. Ada yang berasal dari berbagai daerah di Indonesia, ada yang memiliki profesi berbeda-beda, bahkan komunitas ini juga sangat inklusif. Di dalamnya ada anggota non-disabilitas maupun penyandang disabilitas yang sama-sama menikmati permainan ini tanpa perbedaan. Dari sinilah saya menyadari bahwa Hattrick bukan sekadar game, melainkan tempat untuk berteman dan membangun jaringan.
+
+Saya juga sempat berhenti bermain karena kesibukan belajar pemrograman. Saat itu fokus saya lebih banyak di dunia teknologi sehingga Hattrick harus saya tinggalkan untuk sementara waktu.
+
+Namun pada akhirnya saya kembali.
+
+Menariknya, alasan saya kembali bukan hanya karena rindu bermain, tetapi juga karena saya melihat Hattrick sebagai tempat belajar. Data yang sangat banyak di dalam game ini menjadi bahan latihan yang menarik untuk mempelajari data science dan pemrograman. Saya mulai membuat berbagai proyek kecil, mempelajari API, mengolah data pertandingan, hingga membangun alat bantu untuk komunitas. Tanpa saya sadari, Hattrick ikut menemani perjalanan saya belajar menjadi seorang programmer.
+
+Sebagai seorang manajer, bagian yang paling saya nikmati adalah menyusun strategi sebelum pertandingan. Lalu tibalah saat yang paling mendebarkan setiap pekan: membuka laporan hasil pertandingan. Ada rasa penasaran yang sulit dijelaskan. Apakah strategi saya berhasil? Apakah latihan selama berminggu-minggu mulai menunjukkan hasil? Semua jawabannya ada di laporan pertandingan.
+
+Kalau ditanya apa kesalahan terbesar saya selama bermain Hattrick, saya akan menjawab dengan jujur: saya kurang disiplin, kurang teliti, dan sering kali tidak menganalisis keadaan secara mendalam. Kesalahan-kesalahan itulah yang justru mengajarkan saya bahwa kesabaran dan konsistensi adalah modal utama dalam permainan ini.
+
+Saat ini saya memiliki mimpi yang sederhana tetapi besar. Saya ingin membawa Lancang Kuning FC menembus Divisi I Liga Indonesia dan suatu hari nanti bermain di Hattrick Masters. Saya tahu jalan menuju ke sana masih panjang, tetapi justru perjalanan itulah yang ingin saya nikmati.
+
+Di luar permainan, saya juga ingin ikut membesarkan komunitas Hattrick Indonesia. Melalui website, artikel, dan berbagai alat bantu yang saya kembangkan, saya berharap semakin banyak orang mengenal Hattrick. Selain berbagi dengan komunitas, semua itu juga menjadi sarana bagi saya untuk terus belajar pemrograman.
+
+Kalau hari ini ada seseorang bertanya kepada saya, "Kenapa saya harus mencoba Hattrick?", maka jawaban saya sederhana.
+
+Karena Hattrick bukan sekadar game.
+
+Hattrick adalah komunitas yang mengajarkan kesabaran, kedisiplinan, ketelitian, dan cara berpikir jangka panjang. Mungkin kita memang tidak mengangkat trofi sungguhan, tetapi setiap keputusan yang kita ambil akan mengajarkan sesuatu. Dan bagi saya, itulah yang membuat Hattrick tetap menarik untuk dimainkan hingga hari ini.
