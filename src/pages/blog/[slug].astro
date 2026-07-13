@@ -8,7 +8,6 @@ import { getCollection, render } from 'astro:content';
 export async function getStaticPaths() {
   const blogPosts = await getCollection('blog');
   return blogPosts.map(post => ({
-    // Di Astro v6, gunakan post.id sebagai pengganti post.slug
     params: { slug: post.id },
     props: { post, allPosts: blogPosts },
   }));
@@ -16,13 +15,17 @@ export async function getStaticPaths() {
 
 const { post, allPosts } = Astro.props;
 
-// Di Astro v6, cara me-render konten MDX menggunakan fungsi render() bawaan
+// Di Astro v7, cara me-render konten MDX menggunakan fungsi render() bawaan
 const { Content } = await render(post);
 
-// Rekomendasi bacaan (ambil 2 artikel selain artikel aktif saat ini)
-const recommendations = allPosts
-  .filter(p => p.id !== post.id)
-  .slice(0, 2);
+// 1. Saring artikel aktif agar tidak muncul di rekomendasi sendiri
+const filteredPosts = allPosts.filter(p => p.id !== post.id);
+
+// 2. Acak urutan artikel agar rekomendasinya selalu berubah-ubah dan tidak monoton
+const shuffledPosts = filteredPosts.sort(() => Math.random() - 0.5);
+
+// 3. Ambil 4 artikel hasil acak (bisa diganti angkanya jika ingin lebih banyak)
+const recommendations = shuffledPosts.slice(0, 4);
 
 const currentFullUrl = `https://hattrick.web.id/blog/${post.id}`;
 ---
@@ -213,11 +216,21 @@ const currentFullUrl = `https://hattrick.web.id/blog/${post.id}`;
     .recommendations-section h2 { font-size: 1.75rem; padding: 1.5rem 1rem; }
   }
 
-  .rec-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-  @media (min-width: 600px) { .rec-grid { grid-template-columns: 1fr 1fr; } }
-  .rec-card { display: flex; flex-direction: column; border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden; }
+  .rec-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 1.5rem; 
+  }
+
+  @media (min-width: 600px) { 
+    /* Menggunakan repeat auto-fit agar grid otomatis membagi 4 kotak secara responsif */
+    .rec-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); } 
+  }
+  
+  .rec-card { display: flex; flex-direction: column; border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden; background: white; }
   .rec-thumb { width: 100%; height: 130px; object-fit: cover; }
   .rec-content { padding: 1rem; }
   .rec-content h3 a { color: var(--color-text); text-decoration: none; font-size: 1.1rem; }
+  .rec-content h3 a:hover { color: var(--color-primary); }
   .rec-content p { font-size: 0.85rem; color: var(--color-muted); margin-top: 0.25rem; }
 </style>
