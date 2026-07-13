@@ -1,0 +1,515 @@
+---
+// src/pages/kalkulator-htms.astro
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import ContactSocial from '../components/ContactSocial.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Kalkulator Potensi HTMS Pemain - Hattrick Game Manager Indonesia" 
+  description="Hitung nilai HTMS saat ini, proyeksi skor maksimal di usia 28 tahun, serta loyalitas pemain Hattrick Anda dengan kalkulator ramah aksesibilitas."
+>
+  
+  <div class="small-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/banner.webp');"></div>
+
+  <Navbar />
+
+  <main id="main-content" class="container about-layout">
+    <article class="about-content">
+      
+      <header class="about-header">
+        <h1>Kalkulator Potensi HTMS Pemain</h1>
+      </header>
+
+      <p class="intro-text">
+        Masukkan data umur berjalan (tahun dan hari) serta level atribut kemampuan pemain Anda saat ini.
+      </p>
+
+      <!-- Formulir Kalkulator -->
+      <form id="form-htms" class="kalkulator-form" onsubmit="return false;">
+        
+        <!-- Bagian 1: Informasi Usia Pemain -->
+        <fieldset class="form-section">
+          <legend class="section-title">1. Umur Berjalan Pemain</legend>
+          <div class="input-grid-dua">
+            <div class="form-group">
+              <label for="input-tahun">Usia (Tahun):</label>
+              <select id="input-tahun" name="tahun" required aria-describedby="hint-tahun">
+                {Array.from({ length: 19 }, (_, i) => i + 17).map(thn => (
+                  <option value={thn}>{thn} Tahun</option>
+                ))}
+              </select>
+              <span id="hint-tahun" class="sr-only">Pilih umur pemain dalam satuan tahun, batas acuan dari 17 sampai 35 tahun.</span>
+            </div>
+
+            <div class="form-group">
+              <label for="input-hari">Sisa Hari Usia:</label>
+              <select id="input-hari" name="hari" required aria-describedby="hint-hari">
+                {Array.from({ length: 112 }, (_, i) => i).map(hr => (
+                  <option value={hr}>{hr} Hari</option>
+                ))}
+              </select>
+              <span id="hint-hari" class="sr-only">Pilih sisa hari usia dari angka 0 sampai 111 hari.</span>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Bagian 2: Nilai Atribut Kemampuan Pemain -->
+        <fieldset class="form-section">
+          <legend class="section-title">2. Tingkat Kemampuan (*Skill*) Pemain</legend>
+          <p class="fieldset-desc">Pilih tingkat level (*grade*) dari masing-masing atribut pemain (skala 0 sampai 20):</p>
+          
+          <div class="skills-grid">
+            <div class="form-group">
+              <label for="skill-gk">Penjaga Gawang (*GK*):</label>
+              <select id="skill-gk" name="gk">
+                {Array.from({ length: 21 }, (_, i) => i).map(lvl => <option value={lvl}>Level {lvl}</option>)}
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="skill-df">Bertahan (*DF*):</label>
+              <select id="skill-df" name="df">
+                {Array.from({ length: 21 }, (_, i) => i).map(lvl => <option value={lvl}>Level {lvl}</option>)}
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="skill-pm">Olah Bola / Gelandang (*PM*):</label>
+              <select id="skill-pm" name="pm">
+                {Array.from({ length: 21 }, (_, i) => i).map(lvl => <option value={lvl}>Level {lvl}</option>)}
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="skill-wg">Sayap (*WG*):</label>
+              <select id="skill-wg" name="wg">
+                {Array.from({ length: 21 }, (_, i) => i).map(lvl => <option value={lvl}>Level {lvl}</option>)}
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="skill-ps">Operan (*PS*):</label>
+              <select id="skill-ps" name="ps">
+                {Array.from({ length: 21 }, (_, i) => i).map(lvl => <option value={lvl}>Level {lvl}</option>)}
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="skill-sc">Cetak Gol / Penyerang (*SC*):</label>
+              <select id="skill-sc" name="sc">
+                {Array.from({ length: 21 }, (_, i) => i).map(lvl => <option value={lvl}>Level {lvl}</option>)}
+              </select>
+            </div>
+
+            <div class="form-group-full">
+              <label for="skill-sp">Bola Mati (*SP*):</label>
+              <select id="skill-sp" name="sp">
+                {Array.from({ length: 21 }, (_, i) => i).map(lvl => <option value={lvl}>Level {lvl}</option>)}
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <button type="button" id="btn-hitung" class="btn-primary-kalkulator">Hitung Potensi HTMS</button>
+      </form>
+
+      <!-- Bagian 3: Hasil Output -->
+      <section class="hasil-container" aria-labelledby="judul-hasil">
+        <h2 id="judul-hasil">Hasil Analisis:</h2>
+        
+        <div id="panel-output" aria-live="polite" class="output-box">
+          <p class="placeholder-text">Silakan ubah data di atas lalu klik tombol hitung untuk memproses informasi pemain.</p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <ContactSocial />
+  <Footer />
+</Layout>
+
+<script>
+  const WEEKLY_BASE_INDEX = {
+      17: 10.0, 18: 9.92, 19: 9.81, 20: 9.69, 21: 9.54, 22: 9.39, 23: 9.22,
+      24: 9.04, 25: 8.85, 26: 8.66, 27: 8.47, 28: 8.27, 29: 8.07, 30: 7.87,
+      31: 7.67, 32: 7.47, 33: 7.27, 34: 7.07, 35: 6.87
+  };
+
+  const ANNUAL_GROWTH_FACTOR = Object.fromEntries(
+      Object.entries(WEEKLY_BASE_INDEX).map(([idxYear, numVal]) => [idxYear, numVal * 16])
+  );
+
+  const ABILITY_SCORE_GRID = {
+      'gk': [0, 2, 12, 23, 39, 56, 76, 99, 123, 150, 183, 222, 268, 321, 380, 446, 519, 600, 691, 797, 924],
+      'df': [0, 4, 18, 39, 65, 98, 134, 175, 221, 271, 330, 401, 484, 580, 689, 809, 942, 1092, 1268, 1487, 1791],
+      'pm': [0, 4, 17, 34, 57, 84, 114, 150, 190, 231, 281, 341, 412, 493, 584, 685, 798, 924, 1070, 1247, 1480],
+      'wg': [0, 2, 12, 25, 41, 60, 81, 105, 132, 161, 195, 238, 287, 344, 407, 478, 555, 642, 741, 855, 995],
+      'ps': [0, 3, 14, 31, 51, 75, 104, 137, 173, 213, 259, 315, 381, 457, 540, 634, 738, 854, 988, 1148, 1355],
+      'sc': [0, 4, 17, 36, 59, 88, 119, 156, 197, 240, 291, 354, 427, 511, 607, 713, 830, 961, 1114, 1300, 1547],
+      'sp': [0, 1, 2, 5, 9, 15, 21, 28, 37, 46, 56, 68, 81, 95, 112, 131, 153, 179, 210, 246, 287]
+  };
+
+  function kalkulasiRatingPemain(totalTahun, sisaHari, dataKeahlian) {
+      function dapatkanSkorMurni(namaAtribut, tingkatGrade) {
+          const daftarPoin = ABILITY_SCORE_GRID[namaAtribut];
+          if (daftarPoin && daftarPoin[tingkatGrade] !== undefined) {
+              return daftarPoin[tingkatGrade];
+          }
+          return 0;
+      }
+
+      let akumulasiSkorAwal = 0;
+      let akumulasiSkorBonus = 0;
+
+      for (const keyAtribut in dataKeahlian) {
+          const gradeSekarang = dataKeahlian[keyAtribut];
+          akumulasiSkorAwal += dapatkanSkorMurni(keyAtribut, gradeSekarang);
+          // Batasi grade + 1 agar tidak out of bounds jika input sudah level 20
+          const gradeBonus = gradeSekarang < 20 ? gradeSekarang + 1 : 20;
+          akumulasiSkorBonus += dapatkanSkorMurni(keyAtribut, gradeBonus);
+      }
+
+      let konstantaEmas = 0;
+      for (const stringTahun in ANNUAL_GROWTH_FACTOR) {
+          const angkaTahun = parseInt(stringTahun);
+          if (angkaTahun >= 17 && angkaTahun <= 27) {
+              konstantaEmas += ANNUAL_GROWTH_FACTOR[angkaTahun];
+          }
+      }
+
+      const totalAwalStandard = konstantaEmas + akumulasiSkorAwal;
+      const totalAwalBonus = konstantaEmas + akumulasiSkorBonus;
+
+      let akumulasiPinaltiUmur = 0;
+      for (const stringTahun in ANNUAL_GROWTH_FACTOR) {
+          const angkaTahun = parseInt(stringTahun);
+          if (angkaTahun >= 17 && angkaTahun < totalTahun) {
+              akumulasiPinaltiUmur += ANNUAL_GROWTH_FACTOR[angkaTahun];
+          }
+      }
+
+      const sisaSkorStandard = totalAwalStandard - akumulasiPinaltiUmur;
+      const sisaSkorBonus = totalAwalBonus - akumulasiPinaltiUmur;
+
+      const nilaiTahunBerjalan = ANNUAL_GROWTH_FACTOR[totalTahun] || 0;
+      const reduksiProporsionalHari = (sisaHari / 112) * nilaiTahunBerjalan;
+
+      let totalAkhirStandard = sisaSkorStandard - reduksiProporsionalHari;
+      let totalAkhirBonus = sisaSkorBonus - reduksiProporsionalHari;
+
+      const cekKiperUtama = dataKeahlian['gk'] >= dataKeahlian['df'] && 
+                            ['pm', 'wg', 'ps', 'sc'].every(attr => dataKeahlian['gk'] > dataKeahlian[attr]);
+
+      if (cekKiperUtama) {
+          totalAkhirStandard += 200;
+          totalAkhirBonus += 200;
+      }
+
+      return {
+          "skor_saat_ini": Math.round(akumulasiSkorAwal),
+          "proyeksi_skor_maks": Math.round(totalAkhirStandard),
+          "skor_loyal_saat_ini": Math.round(akumulasiSkorBonus),
+          "proyeksi_skor_loyal_maks": Math.round(totalAkhirBonus),
+          "status_kiper_utama": cekKiperUtama
+      };
+  }
+
+  document.getElementById('btn-hitung')?.addEventListener('click', () => {
+    const tahun = parseInt((document.getElementById('input-tahun') as HTMLSelectElement).value);
+    const hari = parseInt((document.getElementById('input-hari') as HTMLSelectElement).value);
+    
+    const dataKeahlian = {
+      gk: parseInt((document.getElementById('skill-gk') as HTMLSelectElement).value),
+      df: parseInt((document.getElementById('skill-df') as HTMLSelectElement).value),
+      pm: parseInt((document.getElementById('skill-pm') as HTMLSelectElement).value),
+      wg: parseInt((document.getElementById('skill-wg') as HTMLSelectElement).value),
+      ps: parseInt((document.getElementById('skill-ps') as HTMLSelectElement).value),
+      sc: parseInt((document.getElementById('skill-sc') as HTMLSelectElement).value),
+      sp: parseInt((document.getElementById('skill-sp') as HTMLSelectElement).value),
+    };
+
+    const hasil = kalkulasiRatingPemain(tahun, hari, dataKeahlian);
+    const panelOutput = document.getElementById('panel-output');
+
+    // Cek kelayakan masuk Timnas (> 2000)
+    const potensiTimnas = hasil.proyeksi_skor_maks > 2000 || hasil.proyeksi_skor_loyal_maks > 2000;
+    const infoTimnasHTML = potensiTimnas 
+      ? `<div class="timnas-badge">⚡ Pemain ini memiliki potensi bermain di Tim Nasional jika dilatih dengan baik!</div>` 
+      : '';
+
+    if (panelOutput) {
+      panelOutput.innerHTML = `
+        <div class="result-grid">
+          <div class="result-card">
+            <span class="result-label">HTMS Saat Ini:</span>
+            <strong class="result-value">${hasil.skor_saat_ini}</strong>
+          </div>
+          <div class="result-card accent">
+            <span class="result-label">Potensi HTMS Usia 28:</span>
+            <strong class="result-value">${hasil.proyeksi_skor_maks}</strong>
+          </div>
+          <div class="result-card">
+            <span class="result-label">HTMS Loyal Saat Ini:</span>
+            <strong class="result-value">${hasil.skor_loyal_saat_ini}</strong>
+          </div>
+          <div class="result-card accent">
+            <span class="result-label">Potensi HTMS Loyal Usia 28:</span>
+            <strong class="result-value">${hasil.proyeksi_skor_loyal_maks}</strong>
+          </div>
+        </div>
+        
+        <p class="role-badge ${hasil.status_kiper_utama ? 'is-gk' : 'is-field'}">
+          Peran Terdeteksi: <strong>${hasil.status_kiper_utama ? 'Kiper' : 'Pemain Lapangan'}</strong>
+        </p>
+
+        ${infoTimnasHTML}
+      `;
+    }
+  });
+</script>
+
+<style>
+  .small-banner {
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    clear: both;
+    position: relative;
+  }
+
+  .about-layout {
+    padding-top: 2.5rem;
+    padding-bottom: 4rem;
+    max-width: 800px;
+  }
+
+  .about-header h1 {
+    font-size: 1.6rem; 
+    line-height: 1.4; 
+    color: #ffffff; 
+    background-color: #111827;
+    padding: 1.5rem 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (min-width: 768px) {
+    .about-header h1 { font-size: 2.25rem; padding: 2rem 1.5rem; }
+  }
+
+  .intro-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #374151;
+    margin-bottom: 2rem;
+  }
+
+  .kalkulator-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-section {
+    border: 2px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    background-color: #f9fafb;
+  }
+
+  .section-title {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #111827;
+    padding: 0 0.5rem;
+  }
+
+  .fieldset-desc {
+    font-size: 0.95rem;
+    color: #4b5563;
+    margin-bottom: 1rem;
+  }
+
+  .input-grid-dua {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 600px) {
+    .input-grid-dua { grid-template-columns: 1fr 1fr; }
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 600px) {
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .form-group-full { grid-column: span 2; }
+  }
+
+  .form-group, .form-group-full {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #1f2937;
+  }
+
+  select {
+    padding: 0.6rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    background-color: #ffffff;
+    color: #111827;
+  }
+
+  select:focus {
+    outline: 3px solid #3b82f6;
+    outline-offset: 1px;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .btn-primary-kalkulator {
+    background-color: #2563eb;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: background-color 0.2s;
+  }
+
+  .btn-primary-kalkulator:hover {
+    background-color: #1d4ed8;
+  }
+
+  .btn-primary-kalkulator:focus {
+    outline: 3px solid #93c5fd;
+  }
+
+  .hasil-container {
+    margin-top: 2.5rem;
+    border-top: 3px dashed #d1d5db;
+    padding-top: 2rem;
+  }
+
+  .hasil-container h2 {
+    font-size: 1.5rem;
+    color: #111827;
+    margin-bottom: 1rem;
+  }
+
+  .output-box {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    min-height: 80px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+  }
+
+  .placeholder-text {
+    color: #6b7280;
+    font-style: italic;
+  }
+
+  .result-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (min-width: 600px) {
+    .result-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .result-card {
+    background-color: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .result-card.accent {
+    background-color: #eff6ff;
+    border-color: #bfdbfe;
+  }
+
+  .result-label {
+    font-size: 0.9rem;
+    color: #4b5563;
+  }
+
+  .result-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #111827;
+  }
+
+  .result-card.accent .result-value {
+    color: #1d4ed8;
+  }
+
+  .role-badge {
+    padding: 1rem;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .role-badge.is-gk {
+    background-color: #ecfdf5;
+    border-left: 4px solid #10b981;
+    color: #065f46;
+  }
+
+  .role-badge.is-field {
+    background-color: #f9fafb;
+    border-left: 4px solid #6b7280;
+    color: #374151;
+  }
+
+  .timnas-badge {
+    padding: 1rem;
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 0.375rem;
+    color: #166534;
+    font-weight: 700;
+    font-size: 1.05rem;
+    box-shadow: 0 2px 4px rgba(22, 101, 52, 0.05);
+  }
+</style>
