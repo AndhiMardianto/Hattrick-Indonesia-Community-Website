@@ -37,7 +37,7 @@ const allPosts = await getCollection('blog');
               <div class="tags-wrapper">
                 {post.data.tags.map(tag => <span class="tag">#{tag}</span>)}
               </div>
-              <h2><a href={`/blog/${post.slug}`}>{post.data.title}</a></h2>
+              <h2><a href={`/blog/${post.id}`}>{post.data.title}</a></h2>
               
               <div class="meta-author">
                 Oleh: <strong>{post.data.author}</strong>
@@ -47,7 +47,7 @@ const allPosts = await getCollection('blog');
               
               <div class="read-more-wrapper">
                 <a 
-                  href={`/blog/${post.slug}`} 
+                  href={`/blog/${post.id}`} 
                   class="read-more-btn" 
                   aria-label={`Baca selengkapnya mengenai ${post.data.title}`}
                 >
