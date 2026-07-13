@@ -1,6 +1,5 @@
 <nav class="navbar" aria-label="Navigasi Utama">
   <div class="container nav-wrapper">
-     <a href="/" class="brand" aria-label="Hattrick Komunitas">Hattrick<span>Komunitas</span></a>
     <ul class="nav-links">
       <li><a href="/">Beranda</a></li>
       <li><a href="/tentang-kami">Tentang Kami</a></li>
@@ -12,46 +11,36 @@
   .navbar { 
     border-bottom: 1px solid var(--color-border); 
     background: #ffffff; 
-    /* Menaikkan padding vertikal agar pembungkus putihnya lebih luas */
+    /* Padding vertikal agar pembungkus putihnya proporsional */
     padding: 1.25rem 0; 
-    /* Pengaman agar struktur navbar tidak ditembus atau menindih elemen di bawahnya */
+    /* Pengaman struktur navbar */
     position: relative;
     z-index: 10;
   }
   
   .nav-wrapper { 
     display: flex; 
-    justify-content: space-between; 
+    /* Membuat konten di dalamnya (nav-links) berada tepat di tengah-tengah */
+    justify-content: center; 
     align-items: center; 
-  }
-  
-  .brand { 
-    font-size: 1.5rem; 
-    font-weight: 800; 
-    color: var(--color-text); 
-    text-decoration: none; 
-  }
-  
-  .brand span { 
-    color: var(--color-primary); 
   }
   
   .nav-links { 
     display: flex; 
     list-style: none; 
+    /* Jarak antar tombol (Beranda dan Tentang Kami) */
     gap: 1rem; 
     margin: 0;
     padding: 0;
     align-items: center; 
   }
   
-  /* Mengubah tautan biasa menjadi bentuk Tombol Hijau Lapangan Bola yang Ramping */
+  /* Bentuk Tombol Hijau Lapangan Bola yang Ramping */
   .nav-links a { 
     text-decoration: none; 
     color: #ffffff; 
     background-color: #15803d; 
     font-weight: 700; 
-    /* Mengurangi padding atas-bawah ke 0.4rem agar tombol proporsional di dalam navbar */
     padding: 0.4rem 1.25rem; 
     border-radius: 0.5rem; 
     display: inline-block;
@@ -63,5 +52,16 @@
   .nav-links a:hover { 
     background-color: #16a34a; 
     color: #ffffff;
+  }
+
+  /* Khusus Layar HP Sangat Kecil (Layar di bawah 360px agar tetap aman) */
+  @media (max-width: 360px) {
+    .nav-links {
+      gap: 0.5rem; /* Memperkecil sedikit jarak antar tombol agar tidak sesak */
+    }
+    .nav-links a {
+      padding: 0.4rem 1rem; /* Mengurangi sedikit padding tombol di HP jadul */
+      font-size: 0.95rem;
+    }
   }
 </style>
