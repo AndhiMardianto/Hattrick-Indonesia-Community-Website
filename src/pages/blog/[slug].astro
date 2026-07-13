@@ -3,25 +3,28 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import ContactSocial from '../../components/ContactSocial.astro';
 import Footer from '../../components/Footer.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const blogPosts = await getCollection('blog');
   return blogPosts.map(post => ({
-    params: { slug: post.slug },
+    // Di Astro v6, gunakan post.id sebagai pengganti post.slug
+    params: { slug: post.id },
     props: { post, allPosts: blogPosts },
   }));
 }
 
 const { post, allPosts } = Astro.props;
-const { Content } = await post.render();
+
+// Di Astro v6, cara me-render konten MDX menggunakan fungsi render() bawaan
+const { Content } = await render(post);
 
 // Rekomendasi bacaan (ambil 2 artikel selain artikel aktif saat ini)
 const recommendations = allPosts
-  .filter(p => p.slug !== post.slug)
+  .filter(p => p.id !== post.id)
   .slice(0, 2);
 
-const currentFullUrl = `https://hattrick.web.id/blog/${post.slug}`;
+const currentFullUrl = `https://hattrick.web.id/blog/${post.id}`;
 ---
 
 <Layout title={post.data.title} description={post.data.description} image={post.data.thumbnail} canonicalUrl={currentFullUrl}>
@@ -62,7 +65,7 @@ const currentFullUrl = `https://hattrick.web.id/blog/${post.slug}`;
             <div class="rec-card">
               <img src={rec.data.thumbnail} alt="" class="rec-thumb" />
               <div class="rec-content">
-                <h3><a href={`/blog/${rec.slug}`}>{rec.data.title}</a></h3>
+                <h3><a href={`/blog/${rec.id}`}>{rec.data.title}</a></h3>
                 <p>{rec.data.description.slice(0, 75)}...</p>
               </div>
             </div>
@@ -146,13 +149,13 @@ const currentFullUrl = `https://hattrick.web.id/blog/${post.slug}`;
   .article-body :global(h2) { margin: 2rem 0 1rem 0; font-size: 1.6rem; }
   /* Gambar di dalam artikel */
   .article-body :global(img) {
-  display: block;
-  width: 100%;
-  max-width: 650px;
-  height: auto;
-  margin: 2rem auto;
-  border-radius: 0.5rem;
-}
+    display: block;
+    width: 100%;
+    max-width: 650px;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 0.5rem;
+  }
 
   /* Tombol bagikan adaptif */
   .share-box { 
