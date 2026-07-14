@@ -23,6 +23,16 @@ const { title, description, image = '/banner.webp', canonicalUrl = 'https://hatt
   <meta property="twitter:title" content={title} />
   <meta property="twitter:description" content={description} />
   <meta property="twitter:image" content={image} />
+
+  <!-- Google tag (gtag.js) -->
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-GN5YGPF95X"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GN5YGPF95X');
+  </script>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Lompat ke konten utama</a>
