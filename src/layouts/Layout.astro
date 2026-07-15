@@ -1,6 +1,6 @@
 ---
 // src/layouts/Layout.astro
-// Komponen ini menangani SEO, Meta Open Graph (OG) menggunakan thumbnail artikel, serta struktur HTML5 yang ramah terhadap aksesibilitas
+// Komponen ini menangani SEO, Meta Open Graph (OG), Google Analytics, serta struktur HTML5 + Aksesibilitas Global
 const { title, description, image = '/banner.webp', canonicalUrl = 'https://hattrick.web.id' } = Astro.props;
 ---
 
@@ -9,7 +9,7 @@ const { title, description, image = '/banner.webp', canonicalUrl = 'https://hatt
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title} | Hattrick Manager Journal</title>
+  <title>{title} |  Komunitas Hattrick Manager Indonesia</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalUrl} />
 
@@ -23,6 +23,22 @@ const { title, description, image = '/banner.webp', canonicalUrl = 'https://hatt
   <meta property="twitter:title" content={title} />
   <meta property="twitter:description" content={description} />
   <meta property="twitter:image" content={image} />
+
+  <!-- Script Anti-Flicker Aksesibilitas: Berjalan sebelum halaman dirender -->
+  <script is:inline>
+    (function () {
+      const theme = localStorage.getItem('ht-theme') || 'light';
+      const fontSize = localStorage.getItem('ht-font-size') || 'normal';
+      
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark-mode');
+      } else if (theme === 'high-contrast') {
+        document.documentElement.classList.add('high-contrast-mode');
+      }
+      
+      document.documentElement.setAttribute('data-font-size', fontSize);
+    })();
+  </script>
 
   <!-- Google tag (gtag.js) -->
   <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-GN5YGPF95X"></script>
@@ -42,7 +58,7 @@ const { title, description, image = '/banner.webp', canonicalUrl = 'https://hatt
 </html>
 
 <style is:global>
-  /* CSS Global & Reset - Bersih & Standar */
+  /* --- CSS GLOBAL VARIABLES & ROOT --- */
   :root {
     --color-primary: #16a34a; /* Hijau Rumput Hattrick */
     --color-primary-dark: #15803d;
@@ -51,15 +67,50 @@ const { title, description, image = '/banner.webp', canonicalUrl = 'https://hatt
     --color-muted: #4b5563;
     --color-border: #e5e7eb;
     --max-width: 1100px;
+    
+    /* Font Size base awal */
+    --base-font-size: 100%; /* Standar 16px dari browser */
   }
 
+  /* --- DATA-FONT-SIZE MODIFIERS --- */
+  html[data-font-size="medium"] {
+    --base-font-size: 115%; /* Naik sekitar 18-19px */
+  }
+  html[data-font-size="large"] {
+    --base-font-size: 130%; /* Naik sekitar 20-21px */
+  }
+
+  /* --- DARK MODE THEME --- */
+  html.dark-mode {
+    --color-bg: #111827; /* Abu gelap pekat */
+    --color-text: #f9fafb;
+    --color-muted: #9ca3af;
+    --color-border: #374151;
+    --color-primary: #22c55e; /* Hijau yang sedikit lebih terang agar kontras di latar gelap */
+  }
+
+  /* --- HIGH CONTRAST MODE THEME --- */
+  html.high-contrast-mode {
+    --color-bg: #000000; /* Hitam mutlak */
+    --color-text: #ffffff; /* Putih mutlak */
+    --color-muted: #ffff00; /* Kuning terang untuk teks sekunder/muted */
+    --color-border: #ffffff;
+    --color-primary: #ffff00; /* Kuning neon untuk penanda fokus/utama */
+  }
+
+  /* --- RESET & LAYOUT --- */
   * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    font-size: var(--base-font-size);
+  }
 
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: var(--color-bg);
     color: var(--color-text);
     line-height: 1.6;
+    transition: background-color 0.2s ease, color 0.2s ease, font-size 0.2s ease;
   }
 
   .container {
@@ -69,19 +120,22 @@ const { title, description, image = '/banner.webp', canonicalUrl = 'https://hatt
     padding: 0 1.5rem;
   }
 
-  /* Style Aksesibilitas Kebalikan Fokus Visual */
+  /* --- STYLE AKSESIBILITAS & FOKUS KEYBOARD --- */
   .skip-link {
     position: absolute;
     top: -40px;
     left: 0;
     background: var(--color-primary);
-    color: white;
-    padding: 8px;
+    color: var(--color-bg); /* Beradaptasi dengan background mode */
+    font-weight: bold;
+    padding: 8px 16px;
     z-index: 100;
     transition: top 0.2s;
+    border: 2px solid var(--color-text);
   }
   .skip-link:focus { top: 0; }
 
+  /* Fokus Visual yang Beradaptasi Otomatis dengan Mode Kontras */
   a:focus, button:focus, input:focus, textarea:focus {
     outline: 3px solid var(--color-primary);
     outline-offset: 2px;

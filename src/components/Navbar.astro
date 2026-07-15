@@ -1,42 +1,121 @@
+<!-- src/components/Navbar.astro -->
 <nav class="navbar" aria-label="Navigasi Utama">
   <div class="container nav-wrapper">
+    <!-- Menu Utama -->
     <ul class="nav-links">
       <li><a href="/">Beranda</a></li>
       <li><a href="/kalkulator-htms">Kalkulator HTMS</a></li>
       <li><a href="/tentang-kami">Tentang Kami</a></li>
     </ul>
+
+    <!-- Menu Aksesibilitas -->
+    <div class="a11y-dropdown">
+      <button class="a11y-toggle-btn" id="a11y-toggle" aria-expanded="false" aria-haspopup="true" aria-label="Menu Aksesibilitas">
+        ♿ <span class="btn-text">Aksesibilitas</span>
+      </button>
+      
+      <div class="a11y-menu" id="a11y-menu" role="menu">
+        <!-- Opsi Tema -->
+        <div class="a11y-section">
+          <span class="a11y-title">Tema Halaman</span>
+          <div class="a11y-options">
+            <button id="theme-light" role="menuitem">☀️ Terang</button>
+            <button id="theme-dark" role="menuitem">🌙 Gelap</button>
+            <button id="theme-contrast" role="menuitem">👁️ Kontras</button>
+          </div>
+        </div>
+        
+        <!-- Opsi Ukuran Huruf -->
+        <div class="a11y-section">
+          <span class="a11y-title">Ukuran Teks</span>
+          <div class="a11y-options">
+            <button id="font-normal" role="menuitem" class="font-indicator">A</button>
+            <button id="font-medium" role="menuitem" class="font-indicator font-med">A+</button>
+            <button id="font-large" role="menuitem" class="font-indicator font-lrg">A++</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </nav>
+
+<script>
+  const toggleBtn = document.getElementById('a11y-toggle') as HTMLButtonElement;
+  const menu = document.getElementById('a11y-menu') as HTMLDivElement;
+
+  // 1. Logika Buka/Tutup Dropdown
+  toggleBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+    toggleBtn.setAttribute('aria-expanded', !isExpanded ? 'true' : 'false');
+    menu?.classList.toggle('show');
+  });
+
+  // Klik di luar menu untuk menutup dropdown
+  document.addEventListener('click', () => {
+    toggleBtn?.setAttribute('aria-expanded', 'false');
+    menu?.classList.remove('show');
+  });
+
+  menu?.addEventListener('click', (e) => e.stopPropagation());
+
+  // 2. Logika Pengubah Tema (Dark/Light/Contrast)
+  const changeTheme = (themeName: 'light' | 'dark' | 'high-contrast') => {
+    document.documentElement.classList.remove('dark-mode', 'high-contrast-mode');
+    
+    if (themeName === 'dark') {
+      document.documentElement.classList.add('dark-mode');
+    } else if (themeName === 'high-contrast') {
+      document.documentElement.classList.add('high-contrast-mode');
+    }
+    
+    localStorage.setItem('ht-theme', themeName);
+  };
+
+  document.getElementById('theme-light')?.addEventListener('click', () => changeTheme('light'));
+  document.getElementById('theme-dark')?.addEventListener('click', () => changeTheme('dark'));
+  document.getElementById('theme-contrast')?.addEventListener('click', () => changeTheme('high-contrast'));
+
+  // 3. Logika Pengubah Ukuran Huruf
+  const changeFontSize = (sizeName: 'normal' | 'medium' | 'large') => {
+    document.documentElement.setAttribute('data-font-size', sizeName);
+    localStorage.setItem('ht-font-size', sizeName);
+  };
+
+  document.getElementById('font-normal')?.addEventListener('click', () => changeFontSize('normal'));
+  document.getElementById('font-medium')?.addEventListener('click', () => changeFontSize('medium'));
+  document.getElementById('font-large')?.addEventListener('click', () => changeFontSize('large'));
+</script>
 
 <style>
   .navbar { 
     border-bottom: 1px solid var(--color-border); 
-    background: #ffffff; 
-    /* Padding vertikal agar pembungkus putihnya proporsional */
+    /* Diubah dari #ffffff ke var agar mendukung mode gelap secara dinamis */
+    background-color: var(--color-bg); 
     padding: 1.25rem 0; 
-    /* Pengaman struktur navbar */
     position: relative;
     z-index: 10;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
   }
   
   .nav-wrapper { 
     display: flex; 
-    /* Membuat konten di dalamnya (nav-links) berada tepat di tengah-tengah */
-    justify-content: center; 
+    /* Diubah dari center menjadi space-between agar menu dan a11y terpisah manis kiri-kanan */
+    justify-content: space-between; 
     align-items: center; 
+    flex-wrap: wrap;
+    gap: 1rem;
   }
   
   .nav-links { 
     display: flex; 
     list-style: none; 
-    /* Jarak antar tombol (Beranda dan Tentang Kami) */
     gap: 1rem; 
     margin: 0;
     padding: 0;
     align-items: center; 
   }
   
-  /* Bentuk Tombol Hijau Lapangan Bola yang Ramping */
   .nav-links a { 
     text-decoration: none; 
     color: #ffffff; 
@@ -49,20 +128,113 @@
     transition: background-color 0.2s ease;
   }
   
-  /* Efek interaktif saat kursor menyentuh tombol */
   .nav-links a:hover { 
     background-color: #16a34a; 
     color: #ffffff;
   }
 
-  /* Khusus Layar HP Sangat Kecil (Layar di bawah 360px agar tetap aman) */
+  /* --- STYLE DROPDOWN AKSESIBILITAS --- */
+  .a11y-dropdown {
+    position: relative;
+  }
+
+  .a11y-toggle-btn {
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    padding: 0.4rem 1rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .a11y-toggle-btn:hover {
+    background-color: var(--color-border);
+  }
+
+  .a11y-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.5rem);
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    min-width: 240px;
+  }
+
+  .a11y-menu.show {
+    display: block;
+  }
+
+  .a11y-section {
+    margin-bottom: 0.85rem;
+  }
+  .a11y-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .a11y-title {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .a11y-options {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .a11y-options button {
+    flex: 1;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    padding: 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .a11y-options button:hover {
+    background-color: var(--color-border);
+  }
+
+  /* Khusus indikator huruf agar visualnya intuitif */
+  .font-indicator { font-weight: bold !important; }
+  .font-med { font-size: 1.05rem !important; }
+  .font-lrg { font-size: 1.25rem !important; }
+
+  /* --- RESPONSIVE LAYOUT UNTUK HP --- */
+  @media (max-width: 600px) {
+    .nav-wrapper {
+      justify-content: center; /* Di HP jadi rata tengah bertumpuk */
+      flex-direction: column;
+    }
+    .a11y-menu {
+      right: 50%;
+      transform: translateX(50%); /* Posisi dropdown pas di tengah layar HP */
+    }
+  }
+
   @media (max-width: 360px) {
     .nav-links {
-      gap: 0.5rem; /* Memperkecil sedikit jarak antar tombol agar tidak sesak */
+      gap: 0.5rem;
     }
     .nav-links a {
-      padding: 0.4rem 1rem; /* Mengurangi sedikit padding tombol di HP jadul */
+      padding: 0.4rem 0.85rem;
       font-size: 0.95rem;
+    }
+    .btn-text {
+      display: none; /* Sembunyikan teks aksessibilitas di layar super sempit, sisakan ikon ♿ */
     }
   }
 </style>
