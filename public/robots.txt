@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hattrick.web.id/sitemap-index.xml
