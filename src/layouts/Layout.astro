@@ -12,7 +12,7 @@ const { title, description, image = '/banner.webp', canonicalUrl = 'https://hatt
   <title>{title} |  Komunitas Hattrick Manager Indonesia</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalUrl} />
-
+  <link rel="preload" as="image" href={image} type="image/webp" fetchpriority="high" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={canonicalUrl} />
   <meta property="og:title" content={title} />
