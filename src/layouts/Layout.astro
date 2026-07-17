@@ -1,6 +1,8 @@
 ---
 // src/layouts/Layout.astro
 // Komponen ini menangani SEO, Meta Open Graph (OG), Google Analytics, serta struktur HTML5 + Aksesibilitas Global
+import { ClientRouter } from "astro:transitions";
+
 const { title, description, image = '/banner.webp', canonicalUrl = 'https://hattrick.web.id' } = Astro.props;
 ---
 
@@ -51,7 +53,9 @@ const { title, description, image = '/banner.webp', canonicalUrl = 'https://hatt
   </script>
 </head>
 <body>
+  <ClientRouter />
   <a href="#main-content" class="skip-link">Lompat ke konten utama</a>
+
 
   <slot />
 </body>
