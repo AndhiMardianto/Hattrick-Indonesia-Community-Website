@@ -6,13 +6,6 @@ import Footer from '../components/Footer.astro';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog');
-
-// Mengurutkan postingan berdasarkan publishDate dari file MDX Anda
-const sortedPosts = allPosts.sort((a, b) => {
-  const dateA = new Date(a.data.publishDate || 0).getTime();
-  const dateB = new Date(b.data.publishDate || 0).getTime();
-  return dateB - dateA;
-});
 ---
 
 <Layout title="Beranda" description="Jurnal Analisis Taktis dan Panduan Strategi Game Manager Hattrick Indonesia.">
@@ -37,17 +30,17 @@ const sortedPosts = allPosts.sort((a, b) => {
 
     <section class="articles-section" aria-label="Daftar Artikel">
       <div class="articles-grid" id="articles-container">
-        {sortedPosts.map((post) => (
+        {allPosts.map((post) => (
           <article class="article-card" data-title={post.data.title.toLowerCase()} data-tags={post.data.tags.join(',').toLowerCase()}>
           <img 
-            src={post.data.thumbnail} 
-            alt={`Thumbnail postingan ${post.data.title}`} 
-            class="card-thumb" 
-            loading="lazy"
-            decoding="async"
-            width="360"
-            height="180"
-          />
+  src={post.data.thumbnail} 
+  alt={`Thumbnail postingan ${post.data.title}`} 
+  class="card-thumb" 
+  loading="lazy"
+  decoding="async"
+  width="360"
+  height="180"
+/>
             <div class="card-body">
               <div class="tags-wrapper">
                 {post.data.tags.map(tag => <span class="tag">#{tag}</span>)}
