@@ -1,0 +1,159 @@
+---
+// src/pages/privacy.astro
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import ContactSocial from '../components/ContactSocial.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Privacy Policy - Kebijakan Privasi hattrick.web.id" 
+  description="Kebijakan Privasi Komunitas Hattrick Game Manager Indonesia (hattrick.web.id). Pelajari bagaimana kami menjaga privasi serta transparansi data penggunaan Google Analytics dan Google AdSense."
+>
+  
+  <div class="small-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/banner.webp');"></div>
+
+  <Navbar />
+
+  <main id="main-content" class="container about-layout">
+    <article class="about-content">
+      
+      <header class="about-header">
+        <h1>Kebijakan Privasi</h1>
+      </header>
+<h2>Transparansi Privasi Pengunjung Komunitas</h2>
+
+<p>Di <strong>Komunitas Hattrick Game Manager Indonesia</strong> (<strong>hattrick.web.id</strong>), dikelola oleh anggota komunitas blind hattrick, privasi pengunjung merupakan salah satu prioritas kami. Halaman Kebijakan Privasi ini menjelaskan jenis informasi yang dapat kami kumpulkan, bagaimana informasi tersebut digunakan, serta langkah-langkah yang kami lakukan untuk menjaga privasi pengunjung.</p>
+
+<p>Apabila Anda memiliki pertanyaan mengenai Kebijakan Privasi ini atau ingin memperoleh informasi lebih lanjut, silakan menghubungi kami melalui kontak yang tersedia di situs ini.</p>
+
+<h3>Informasi yang Kami Kumpulkan</h3>
+
+<p>Situs ini tidak menyediakan fitur pendaftaran akun (login), kolom komentar, maupun formulir pengumpulan data pribadi secara langsung. Oleh karena itu, kami tidak meminta ataupun menyimpan data pribadi pengunjung melalui fitur-fitur tersebut.</p>
+
+<p>Apabila Anda menghubungi kami secara sukarela melalui WhatsApp, email, atau media komunikasi lain yang tersedia di situs ini, kami dapat menerima informasi seperti nama, nomor telepon, alamat email, isi pesan, maupun lampiran yang Anda kirimkan. Informasi tersebut hanya digunakan untuk menanggapi komunikasi yang Anda lakukan.</p>
+<h3>Artikel dan Materi dari Kontributor</h3>
+
+<p>Apabila Anda mengirimkan artikel, gambar, atau materi lainnya kepada kami untuk dipublikasikan di situs ini, kami hanya menggunakan informasi tersebut untuk proses peninjauan, penyuntingan, komunikasi dengan penulis, dan publikasi sesuai persetujuan yang diberikan.</p>
+
+<h3>Log Server</h3>
+
+<p>Seperti kebanyakan situs web lainnya, server dan layanan hosting yang kami gunakan dapat secara otomatis mencatat informasi teknis, seperti alamat IP, jenis browser, penyedia layanan internet (ISP), tanggal dan waktu kunjungan, halaman yang dikunjungi, serta informasi teknis lainnya. Informasi tersebut digunakan untuk keperluan analisis, keamanan, pemeliharaan sistem, dan tidak digunakan untuk mengidentifikasi identitas pribadi pengunjung.</p>
+
+<h3>Cookies</h3>
+
+<p>Situs ini dapat menggunakan <em>cookies</em> untuk meningkatkan pengalaman pengguna, mengingat preferensi tertentu, serta membantu layanan analitik maupun periklanan bekerja dengan baik. Anda dapat mengatur, membatasi, atau menonaktifkan penggunaan <em>cookies</em> melalui pengaturan browser yang Anda gunakan.</p>
+
+<h3>Google Analytics</h3>
+
+<p>Situs ini menggunakan <strong>Google Analytics</strong> untuk membantu kami memahami bagaimana pengunjung menggunakan situs. Layanan ini dapat mengumpulkan informasi seperti halaman yang dikunjungi, durasi kunjungan, jenis perangkat, jenis browser, serta data penggunaan lainnya sesuai dengan kebijakan Google.</p>
+
+<p>Informasi statistik tersebut kami gunakan untuk menganalisis performa situs, memahami kebutuhan pengunjung, dan meningkatkan kualitas konten maupun pengalaman penggunaan. Pengelolaan data oleh Google tunduk pada kebijakan privasi dan ketentuan layanan Google yang berlaku.</p>
+
+<h3>Google AdSense &amp; Cookies Pihak Ketiga</h3>
+
+<p>Apabila situs ini menampilkan iklan melalui <strong>Google AdSense</strong> atau jaringan periklanan pihak ketiga lainnya, penyedia layanan tersebut dapat menggunakan <em>cookies</em> untuk menampilkan iklan yang lebih relevan berdasarkan aktivitas penelusuran Anda di internet.</p>
+
+<p>Informasi lebih lanjut mengenai penggunaan data dan <em>cookies</em> oleh Google dapat dilihat pada halaman berikut:</p>
+
+<p>
+  <a href="https://policies.google.com/technologies/ads"
+     target="_blank"
+     rel="noopener noreferrer"
+     style="color: var(--color-primary); text-decoration: underline;">
+    Kebijakan Periklanan Google
+  </a>
+</p>
+
+<h3>Tautan ke Situs Pihak Ketiga</h3>
+
+<p>Situs ini dapat memuat tautan menuju situs web pihak ketiga. Kami tidak memiliki kendali atas isi, kebijakan privasi, maupun praktik pengelolaan data yang diterapkan oleh situs-situs tersebut. Oleh karena itu, kami menyarankan Anda untuk membaca kebijakan privasi dari setiap situs yang Anda kunjungi.</p>
+
+<div class="closing">
+  <p><strong>Pembaruan:</strong> Kebijakan Privasi ini dapat diperbarui dari waktu ke waktu untuk menyesuaikan perubahan layanan maupun ketentuan yang berlaku. Setiap perubahan akan dipublikasikan secara jelas pada halaman ini.</p>
+
+  <p>Dengan menggunakan situs <strong>hattrick.web.id</strong>, Anda dianggap telah membaca dan memahami Kebijakan Privasi ini.</p>
+      </div>
+
+    </article>
+  </main>
+
+  <ContactSocial />
+  <Footer />
+</Layout>
+
+<style>
+  /* Banner atas murni gambar polos, membersihkan float */
+  .small-banner {
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    clear: both;
+    position: relative;
+  }
+
+  .about-layout {
+    padding-top: 2.5rem;
+    padding-bottom: 4rem;
+    max-width: 800px; /* Dipersempit agar baris teks nyaman dibaca mata */
+  }
+
+  /* KOREKSI: Gaya kotak hitam disematkan langsung ke kelas .about-header h1 */
+  .about-header h1 {
+    font-size: 1.6rem; 
+    line-height: 1.4; 
+    color: #ffffff; 
+    background-color: #111827;
+    padding: 1.5rem 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (min-width: 768px) {
+    .about-header h1 { font-size: 2.25rem; padding: 2rem 1.5rem; }
+  }
+
+  .about-content h2 {
+    font-size: 1.6rem;
+    color: var(--color-text);
+    margin-bottom: 1.25rem;
+    line-height: 1.4;
+  }
+
+  .about-content h3 {
+    font-size: 1.35rem;
+    color: var(--color-text);
+    margin: 2.5rem 0 1rem 0;
+  }
+
+  .about-content p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #2d3748;
+    margin-bottom: 1.25rem;
+  }
+
+  .about-content ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .about-content li {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+    color: #2d3748;
+  }
+
+  .closing {
+    margin-top: 2.5rem;
+    padding: 1.25rem;
+    border-left: 4px solid var(--color-primary);
+    background-color: #f9fafb;
+    font-style: italic;
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+</style>

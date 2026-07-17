@@ -1,23 +1,94 @@
 <section class="social-section" aria-labelledby="social-heading">
   <div class="container">
-    <h2 id="social-heading">Kontak & Media Sosial</h2>
-    <p>Ayo Gabung bersama kami di komunitas Hattrick Manager</p>
+    <h2 id="social-heading">Kontak &amp; Media Sosial</h2>
+
+    <p>
+      Ingin bergabung dengan komunitas, bertanya seputar Hattrick, atau mengirim artikel?
+      Silakan hubungi kami melalui salah satu kontak berikut.
+    </p>
+
     <div class="social-grid">
-      <a href="https://wa.me/6285341759446" class="social-card wa" target="_blank" rel="noopener">
-        <strong>WhatsApp Group</strong>
-        <span>Hubungi Mentor  </span>
+
+      <a
+        href="https://wa.me/6285341759446"
+        class="social-card wa"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Hubungi mentor dan admin komunitas melalui WhatsApp"
+      >
+        <strong>WhatsApp</strong>
+        <span>Hubungi mentor &amp; admin komunitas.</span>
       </a>
+
+      <a
+        href="mailto:andhi@andhim.net"
+        class="social-card email"
+        aria-label="Kirim artikel atau hubungi admin melalui email"
+      >
+        <strong>Email Admin</strong>
+        <span>Kirim artikel, pertanyaan, atau kerja sama.</span>
+      </a>
+
     </div>
   </div>
 </section>
 
 <style>
-  .social-section { padding: 3rem 0; background: #f9fafb; border-top: 1px solid var(--color-border); }
-  .social-section h2 { margin-bottom: 0.5rem; }
-  .social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
-  .social-card { display: flex; flex-direction: column; padding: 1.5rem; border-radius: 0.5rem; text-decoration: none; color: white; }
-  .wa { background-color: #25d366; }
-  .yt { background-color: #ff0000; }
-  .social-card strong { font-size: 1.2rem; }
-  .social-card:hover { opacity: 0.9; }
+  .social-section {
+    padding: 3rem 0;
+    background: #f9fafb;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .social-section h2 {
+    margin-bottom: 0.5rem;
+  }
+
+  .social-section p {
+    margin-bottom: 1.5rem;
+    color: #4b5563;
+    line-height: 1.6;
+  }
+
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .social-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    color: #ffffff;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    min-height: 120px;
+  }
+
+  .social-card:hover,
+  .social-card:focus-visible {
+    opacity: 0.95;
+    transform: translateY(-2px);
+  }
+
+  .social-card strong {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .social-card span {
+    line-height: 1.5;
+  }
+
+  .wa {
+    background-color: #25d366;
+  }
+
+  .email {
+    background-color: #2563eb;
+  }
 </style>

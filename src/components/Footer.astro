@@ -1,6 +1,14 @@
 <footer class="main-footer">
   <div class="container">
     <p>&copy; {new Date().getFullYear()} Komunitas Hattrick Indonesia.</p>
+    
+    <!-- Tautan Tambahan untuk Syarat Google AdSense -->
+    <p class="footer-links">
+      <a href="/privacy">Privacy Policy</a>
+      <span class="separator">|</span>
+      <a href="/disclaimer">Disclaimer</a>
+    </p>
+
     <p>
       Created by
       <a href="https://andhim.net" target="_blank" rel="noopener noreferrer">
@@ -32,5 +40,21 @@
   .main-footer a:hover,
   .main-footer a:focus {
     text-decoration: underline;
+  }
+
+  /* Gaya tambahan untuk tautan privasi dan disclaimer */
+  .footer-links {
+    margin: 0.5rem 0 !important;
+    font-size: 0.85rem;
+  }
+
+  .footer-links a {
+    color: var(--color-text-muted, #718096); /* Menggunakan warna yang sedikit lebih tenang */
+    font-weight: 500;
+  }
+
+  .separator {
+    margin: 0 0.5rem;
+    color: var(--color-border);
   }
 </style>

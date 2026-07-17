@@ -1,0 +1,145 @@
+---
+// src/pages/disclaimer.astro
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import ContactSocial from '../components/ContactSocial.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Disclaimer - Penyangkalan hattrick.web.id" 
+  description="Halaman disclaimer Komunitas Hattrick Game Manager Indonesia (hattrick.web.id). Pernyataan resmi mengenai batasan konten fiksi, hak cipta karya tulis, dan tautan luar."
+>
+  
+  <div class="small-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/banner.webp');"></div>
+
+  <Navbar />
+
+  <main id="main-content" class="container about-layout">
+    <article class="about-content">
+      
+      <header class="about-header">
+        <h1>Disclaimer</h1>
+      </header>
+<h2>Penyangkalan Ketentuan dan Batasan Konten</h2>
+
+<p>Semua informasi yang tersedia di situs web ini — <strong>hattrick.web.id</strong> — diterbitkan dengan iktikad baik untuk tujuan informasi, edukasi, dan hiburan bagi komunitas. Kami berusaha menyajikan informasi yang akurat serta memperbaruinya secara berkala. Namun demikian, Komunitas Hattrick Game Manager Indonesia tidak dapat menjamin bahwa seluruh informasi selalu lengkap, akurat, atau sesuai dengan perkembangan terbaru.</p>
+
+<p>Segala tindakan yang Anda lakukan berdasarkan informasi yang terdapat di situs ini sepenuhnya merupakan tanggung jawab Anda sendiri. Kami tidak bertanggung jawab atas kerugian atau kerusakan apa pun yang timbul akibat penggunaan informasi maupun layanan yang tersedia di situs ini.</p>
+
+<h3>Hubungan dengan Hattrick</h3>
+
+<p>Situs ini merupakan komunitas independen yang dikelola oleh anggota kkomunitas blind hattrick  dan tidak berafiliasi, didukung, maupun dikelola oleh pengembang resmi permainan Hattrick. Seluruh nama, logo, merek dagang, dan hak kekayaan intelektual yang berkaitan dengan Hattrick tetap menjadi milik pemilik haknya masing-masing.</p>
+
+<h3>Batasan Konten Fiksi, Karakter, dan Klub</h3>
+
+<p>Situs ini memuat karya tulis kreatif berupa cerita fiksi seputar dunia sepak bola. Seluruh cerita fiksi yang dipublikasikan merupakan hasil imajinasi dan kreativitas para penulis di komunitas kami.</p>
+
+<p>Nama tokoh, karakter, klub, gambar, tempat, organisasi, maupun peristiwa yang muncul dalam cerita tidak dimaksudkan untuk menggambarkan individu atau organisasi tertentu. Apabila terdapat kemiripan dengan pihak di dunia nyata, hal tersebut merupakan <strong>kebetulan semata</strong> dan tidak dimaksudkan untuk menyudutkan, mencemarkan nama baik, ataupun merugikan pihak mana pun.</p>
+
+<h3>Pendapat Penulis dan Kontributor</h3>
+
+<p>Sebagian artikel di situs ini ditulis oleh anggota atau kontributor Komunitas Hattrick Game Manager Indonesia. Pendapat, analisis, maupun opini yang disampaikan dalam artikel merupakan tanggung jawab masing-masing penulis dan tidak selalu mencerminkan pandangan resmi pengelola situs maupun Komunitas Hattrick Game Manager Indonesia.</p>
+<h3>Hak Cipta Karya Tulis</h3>
+
+<p>Seluruh artikel, panduan permainan Hattrick, analisis sepak bola, cerita fiksi, maupun konten lainnya yang dipublikasikan di situs ini merupakan hak cipta intelektual dari masing-masing penulis atau kontributor yang tergabung dalam <strong>Komunitas Hattrick Game Manager Indonesia</strong>, kecuali dinyatakan lain.</p>
+
+<p>Seluruh konten pada situs ini dilindungi oleh hak cipta. Penggunaan kembali, penggandaan, distribusi, atau publikasi ulang sebagian maupun seluruh isi situs tanpa izin tertulis dari pemilik hak cipta tidak diperkenankan, kecuali sebagaimana diizinkan oleh peraturan perundang-undangan yang berlaku.</p>
+
+<h3>Tautan Eksternal</h3>
+
+<p>Situs ini dapat memuat tautan menuju situs web pihak ketiga, seperti grup WhatsApp resmi komunitas maupun situs eksternal lainnya. Meskipun kami berusaha hanya menyediakan tautan yang bermanfaat dan berkualitas, kami tidak memiliki kendali atas isi, kebijakan, maupun perubahan yang terjadi pada situs-situs tersebut.</p>
+
+<p>Keberadaan tautan eksternal tidak dapat diartikan sebagai bentuk dukungan, rekomendasi, ataupun persetujuan kami terhadap seluruh konten, produk, atau layanan yang tersedia pada situs pihak ketiga tersebut.</p>
+
+<h3>Konten Iklan</h3>
+
+<p>Apabila situs ini menampilkan iklan melalui layanan seperti Google AdSense atau jaringan periklanan lainnya, seluruh isi materi iklan, produk, maupun layanan yang ditawarkan sepenuhnya menjadi tanggung jawab pihak pengiklan. Penayangan iklan tidak dapat diartikan sebagai bentuk rekomendasi atau dukungan langsung dari Komunitas Hattrick Game Manager Indonesia.</p>
+
+<p>Kami tidak bertanggung jawab atas transaksi, klaim, maupun kerugian yang mungkin timbul akibat hubungan antara pengunjung dengan pihak pengiklan.</p>
+
+<div class="closing">
+  <p><strong>Pembaruan:</strong> Dokumen ini terakhir diperbarui pada Juli 2026. Kami dapat memperbarui, mengubah, atau menyempurnakan isi halaman disclaimer ini sewaktu-waktu. Setiap perubahan akan dipublikasikan secara jelas pada halaman ini.</p>
+</div>
+    </article>
+  </main>
+
+  <ContactSocial />
+  <Footer />
+</Layout>
+
+<style>
+  /* Banner atas murni gambar polos, membersihkan float */
+  .small-banner {
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    clear: both;
+    position: relative;
+  }
+
+  .about-layout {
+    padding-top: 2.5rem;
+    padding-bottom: 4rem;
+    max-width: 800px; /* Dipersempit agar baris teks nyaman dibaca mata */
+  }
+
+  /* KOREKSI: Gaya kotak hitam disematkan langsung ke kelas .about-header h1 */
+  .about-header h1 {
+    font-size: 1.6rem; 
+    line-height: 1.4; 
+    color: #ffffff; 
+    background-color: #111827;
+    padding: 1.5rem 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (min-width: 768px) {
+    .about-header h1 { font-size: 2.25rem; padding: 2rem 1.5rem; }
+  }
+
+  .about-content h2 {
+    font-size: 1.6rem;
+    color: var(--color-text);
+    margin-bottom: 1.25rem;
+    line-height: 1.4;
+  }
+
+  .about-content h3 {
+    font-size: 1.35rem;
+    color: var(--color-text);
+    margin: 2.5rem 0 1rem 0;
+  }
+
+  .about-content p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #2d3748;
+    margin-bottom: 1.25rem;
+  }
+
+  .about-content ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .about-content li {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+    color: #2d3748;
+  }
+
+  .closing {
+    margin-top: 2.5rem;
+    padding: 1.25rem;
+    border-left: 4px solid var(--color-primary);
+    background-color: #f9fafb;
+    font-style: italic;
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+</style>

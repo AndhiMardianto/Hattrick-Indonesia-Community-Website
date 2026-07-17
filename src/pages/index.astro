@@ -32,7 +32,15 @@ const allPosts = await getCollection('blog');
       <div class="articles-grid" id="articles-container">
         {allPosts.map((post) => (
           <article class="article-card" data-title={post.data.title.toLowerCase()} data-tags={post.data.tags.join(',').toLowerCase()}>
-            <img src={post.data.thumbnail} alt={`Tumnail postingan ${post.data.title}`} class="card-thumb" />
+          <img 
+  src={post.data.thumbnail} 
+  alt={`Thumbnail postingan ${post.data.title}`} 
+  class="card-thumb" 
+  loading="lazy"
+  decoding="async"
+  width="360"
+  height="180"
+/>
             <div class="card-body">
               <div class="tags-wrapper">
                 {post.data.tags.map(tag => <span class="tag">#{tag}</span>)}
