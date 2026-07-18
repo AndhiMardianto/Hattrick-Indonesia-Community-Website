@@ -2,4 +2,3 @@ User-agent: *
 Allow: /
 
 Sitemap: https://hattrick.web.id/sitemap-index.xml
-LLM: https://hattrick.web.id/llms.txt
