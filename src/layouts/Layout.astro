@@ -11,7 +11,7 @@ const { title, description, image = '/banner.webp', canonicalUrl = 'https://hatt
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title} |  Komunitas Hattrick Manager Indonesia</title>
+  <title>{title} | Komunitas Hattrick Manager Indonesia</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalUrl} />
   <link rel="preload" as="image" href={image} type="image/webp" fetchpriority="high" />
@@ -26,11 +26,14 @@ const { title, description, image = '/banner.webp', canonicalUrl = 'https://hatt
   <meta property="twitter:description" content={description} />
   <meta property="twitter:image" content={image} />
 
-  <!-- Script Anti-Flicker Aksesibilitas: Berjalan sebelum halaman dirender -->
+  <!-- 1. SCRIPT AKSESIBILITAS & TEMA (ANTI-FLICKER) -->
   <script is:inline>
-    (function () {
+    const applyAccessibilitySettings = () => {
       const theme = localStorage.getItem('ht-theme') || 'light';
       const fontSize = localStorage.getItem('ht-font-size') || 'normal';
+      
+      // Bersihkan kelas mode lama terlebih dahulu sebelum menerapkan yang baru
+      document.documentElement.classList.remove('dark-mode', 'high-contrast-mode');
       
       if (theme === 'dark') {
         document.documentElement.classList.add('dark-mode');
@@ -39,21 +42,51 @@ const { title, description, image = '/banner.webp', canonicalUrl = 'https://hatt
       }
       
       document.documentElement.setAttribute('data-font-size', fontSize);
-    })();
+    };
+
+    // Jalankan langsung untuk first-load (mencegah flash putih di awal)
+    applyAccessibilitySettings();
+
+    // Jalankan ulang setiap kali Client Router selesai memuat halaman baru
+    document.addEventListener('astro:page-load', applyAccessibilitySettings);
+
+    // fungsi fokus pembaca layar 
+      // Fungsi untuk mereset fokus pembaca layar ke atas halaman
+  const resetScreenReaderFocus = () => {
+    const pageRoot = document.getElementById('page-root');
+    if (pageRoot) {
+      pageRoot.focus();
+    }
+  };
+
+  // Jalankan setiap kali Client Router selesai memuat halaman baru
+  document.addEventListener('astro:page-load', resetScreenReaderFocus);
   </script>
 
-  <!-- Google tag (gtag.js) -->
+  <!-- 2. GOOGLE ANALYTICS (GA4) DENGAN SUPPORT CLIENT ROUTER -->
   <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-GN5YGPF95X"></script>
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
+    // Konfigurasi awal saat pertama kali web dibuka
     gtag('config', 'G-GN5YGPF95X');
+
+    // Kirim data page_view baru setiap kali pindah halaman via Client Router
+    document.addEventListener('astro:page-load', () => {
+      gtag('event', 'page_view', {
+        page_title: document.title,
+        page_location: window.location.href,
+        page_path: window.location.pathname
+      });
+    });
   </script>
-</head>
-<body>
+
+  <!-- 3. CLIENT ROUTER -->
   <ClientRouter />
+</head>
+<body id="page-root" tabindex="-1" style="outline: none;">
   <a href="#main-content" class="skip-link">Lompat ke konten utama</a>
 
 
