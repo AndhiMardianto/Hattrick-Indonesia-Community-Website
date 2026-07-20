@@ -8,7 +8,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kirim Artikel Komunitas - Hattrick</title>
-  <!-- 1. TAMBAHKAN SCRIPT TURNSTILE DI SINI -->
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
@@ -28,9 +27,15 @@
           <input type="text" id="nama" required placeholder="Masukkan nama panggilan atau nama penamu" autocomplete="off">
         </div>
 
+        <!-- INPUT TAMBAHAN: KONTAK -->
+        <div class="input-group">
+          <label for="kontak">Kontak yang Dapat Dihubungi</label>
+          <input type="text" id="kontak" required placeholder="Nomor WhatsApp, ID Telegram, atau Email" autocomplete="off">
+        </div>
+
         <div class="input-group">
           <label for="judul">Usulan Judul Artikel</label>
-          <input type="text" id="judul" required placeholder="Tulis judul bebas sesuai ide tulisanmu" autocomplete="off">
+          <input type="text" id="judul" required placeholder="Tulis judul bebas sesuai id tulisanmu" autocomplete="off">
         </div>
 
         <div class="input-group">
@@ -38,8 +43,6 @@
           <textarea id="isi" rows="12" required placeholder="Tulis atau tempel naskah artikelmu secara lengkap di sini..."></textarea>
         </div>
 
-        <!-- 2. TAMBAHKAN WIDGET TURNSTILE DI SINI -->
-        <!-- Ganti 'YOUR_TURNSTILE_SITE_KEY' dengan Site Key dari Cloudflare kamu -->
         <div class="cf-turnstile" data-sitekey="0x4AAAAAAD44uKz3jL8-Ij-0" style="margin-bottom: 20px;"></div>
 
         <button type="submit" id="btnKirim">Kirim Artikel ke Editor</button>
@@ -57,15 +60,15 @@
       btn.disabled = true;
       btn.innerText = 'Sedang Mengirim Naskah...';
 
-      // 3. AMBIL TOKEN TURNSTILE DARI FORM
       const formData = new FormData(e.target as HTMLFormElement);
       const turnstileToken = formData.get('cf-turnstile-response');
 
       const payload = {
         nama: (document.getElementById('nama') as HTMLInputElement).value,
+        kontak: (document.getElementById('kontak') as HTMLInputElement).value,
         judul: (document.getElementById('judul') as HTMLInputElement).value,
         isi: (document.getElementById('isi') as HTMLTextAreaElement).value,
-        token: turnstileToken // Token disisipkan ke payload
+        token: turnstileToken
       };
 
       try {
@@ -78,17 +81,24 @@
         const result = await response.json();
 
         if (response.ok && result.success) {
-          alert('Berhasil! ' + result.message);
+          // Alert khusus jika pengiriman sukses
+          alert('Terima kasih, artikel anda akan kami tinjau dan menghubungi anda untuk konfirmasi jika diperlukan.');
           (e.target as HTMLFormElement).reset();
         } else {
-          alert('Gagal mengirim: ' + (result.message || 'Terjadi kesalahan backend.'));
+          // Jika gagal karena terblokir rate limiter bawaan KV (status 422), tampilkan alasan limitnya
+          if (response.status === 422) {
+            alert(result.message);
+          } else {
+            // Alert khusus jika gagal pengiriman umum/server error
+            alert('Sory gagal mengirim artikel ke admin silahkan coba lagi.');
+          }
         }
       } catch (error) {
-        alert('Gagal terhubung ke Worker lokal.');
+        alert('Sory gagal mengirim artikel ke admin silahkan coba lagi.');
       } finally {
         btn.disabled = false;
         btn.innerText = 'Kirim Artikel ke Editor';
-        // Reset widget Turnstile agar bisa digunakan lagi tanpa reload halaman
+        
         if ((window as any).turnstile) {
           (window as any).turnstile.reset();
         }
@@ -99,7 +109,6 @@
 </body>
 </html>
 
-<!-- Bagian 4: CSS Styling (Scoped ke Halaman Ini) -->
 <style>
   :root {
     --primary-color: #003366;
@@ -124,7 +133,6 @@
     padding: 0 20px;
   }
 
-  /* Styling Box Syarat Ketentuan */
   .syarat-box {
     background: #ffffff;
     padding: 30px;
@@ -146,25 +154,6 @@
     color: #57606f;
   }
 
-  .syarat-box ul {
-    padding-left: 20px;
-    margin-bottom: 20px;
-  }
-
-  .syarat-box li {
-    font-size: 14.5px;
-    margin-bottom: 10px;
-  }
-
-  .info-note {
-    background-color: var(--bg-light);
-    border-left: 4px solid #747d8c;
-    padding: 5px 15px;
-    font-size: 13.5px;
-    border-radius: 0 4px 4px 0;
-  }
-
-  /* Styling Box Form Input */
   .form-box {
     background: #ffffff;
     padding: 30px;
@@ -215,7 +204,6 @@
     font-family: inherit;
   }
 
-  /* Styling Tombol Submit */
   button[type="submit"] {
     width: 100%;
     padding: 14px;
