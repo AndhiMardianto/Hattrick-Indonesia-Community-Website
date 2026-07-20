@@ -9,24 +9,59 @@
 
     <div class="social-grid">
 
+      <!-- URUTAN 1: WHATSAPP -->
       <a
         href="https://wa.me/6285341759446"
         class="social-card wa"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Hubungi mentor dan admin komunitas melalui WhatsApp"
+        aria-label="Hubungi mentor dan admin group blind hattrick melalui WhatsApp"
       >
+        <div class="icon-wrapper">
+          <!-- SVG Logo WhatsApp Resmi & Presisi -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24" aria-hidden="true">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.948 0c3.179.001 6.167 1.24 8.412 3.491 2.246 2.252 3.481 5.244 3.48 8.425-.003 6.599-5.34 11.946-11.894 11.946-2.005-.001-3.973-.507-5.731-1.472L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.725 1.45 5.335 0 9.678-4.37 9.68-9.73 0-2.596-1.011-5.038-2.847-6.878-1.836-1.84-4.273-2.854-6.867-2.855-5.336 0-9.677 4.37-9.68 9.732-.001 1.705.449 3.373 1.305 4.843l-.99 3.613 3.674-.977zm9.932-5.462c-.272-.137-1.611-.795-1.861-.886-.25-.092-.432-.137-.613.137-.182.274-.705.886-.864 1.069-.159.183-.318.206-.59.069-.272-.137-1.15-.424-2.19-1.353-.809-.722-1.355-1.614-1.514-1.888-.159-.274-.017-.422.12-.558.123-.122.272-.32.409-.48.136-.16.182-.274.272-.457.091-.183.046-.343-.023-.48-.068-.137-.613-1.477-.84-2.026-.22-.53-.443-.457-.613-.466-.159-.008-.34-.01-.523-.01s-.48.069-.73.343c-.249.274-.954.934-.954 2.277 0 1.343.976 2.637 1.112 2.82.137.183 1.921 2.933 4.653 4.114.65.28 1.157.447 1.55.573.654.207 1.25.178 1.72.108.524-.078 1.612-.658 1.838-1.296.227-.639.227-1.187.159-1.297-.068-.11-.25-.137-.523-.274z"/>
+          </svg>
+        </div>
         <strong>WhatsApp</strong>
-        <span>Hubungi mentor &amp; admin komunitas.</span>
+        <span>Hubungi mentor atau admin group blind hattrick.</span>
       </a>
 
+      <!-- URUTAN 2: KIRIM ARTIKEL -->
       <a
-        href="mailto:andhi@andhim.net"
-        class="social-card email"
-        aria-label="Kirim artikel atau hubungi admin situs melalui email"
+        href="/kirim-artikel"
+        class="social-card kirim"
+        aria-label="Menuju ke halaman formulir pengiriman artikel komunitas"
       >
+        <div class="icon-wrapper">
+          <!-- SVG Ikon Dokumen Bergaris -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+        <strong>Kirim Artikel</strong>
+        <span>Kirim tulisan Anda langsung melalui formulir halaman kirim artikel.</span>
+      </a>
+
+      <!-- URUTAN 3: EMAIL ADMIN SITUS -->
+      <a
+        href="mailto:admin@hattrick.web.id"
+        class="social-card email"
+        aria-label="Hubungi admin situs di admin@hattrick.web.id untuk pertanyaan, kritik, dan saran"
+      >
+        <div class="icon-wrapper">
+          <!-- SVG Ikon Amplop Surat -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+        </div>
         <strong>Email Admin Situs</strong>
-        <span>Kirim artikel, pertanyaan, atau kerja sama.</span>
+        <span>Hubungi admin situs di admin@hattrick.web.id untuk pertanyaan, kritik, dan saran.</span>
       </a>
 
     </div>
@@ -52,43 +87,60 @@
 
   .social-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
   }
 
   .social-card {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 0.5rem;
     padding: 1.5rem;
     border-radius: 0.75rem;
     text-decoration: none;
     color: #ffffff;
     transition: transform 0.2s ease, opacity 0.2s ease;
-    min-height: 120px;
+    min-height: 160px;
   }
 
   .social-card:hover,
   .social-card:focus-visible {
     opacity: 0.95;
-    transform: translateY(-2px);
+    transform: translateY(-4px);
   }
 
   .social-card strong {
     font-size: 1.2rem;
     font-weight: 700;
+    margin-top: 0.5rem;
   }
 
   .social-card span {
     line-height: 1.5;
+    font-size: 0.95rem;
+    opacity: 0.9;
   }
 
-  .wa {
-    background-color: #25d366;
+  .wa { background-color: #25d366; }
+  .kirim { background-color: #ff6600; }
+  .email { background-color: #2563eb; }
+
+  /* Style Wadah Lingkaran untuk Ikon SVG */
+  .icon-wrapper {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 50%;
+    margin-bottom: 0.25rem;
   }
 
-  .email {
-    background-color: #2563eb;
+  /* Memastikan warna SVG bawaan mengikuti warna teks kartu (putih) */
+  .icon-wrapper svg {
+    color: #ffffff;
+    display: block;
   }
 </style>

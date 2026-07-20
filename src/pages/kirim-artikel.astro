@@ -1,5 +1,7 @@
 ---
 // src/pages/kirim-artikel.astro
+import Navbar from '../components/Navbar.astro';
+
 ---
 
 <!DOCTYPE html>
@@ -13,18 +15,24 @@
 <body>
 
   <main class="main-container">
-    <section class="syarat-box">
-      <h1>Kirim Artikel Komunitas Hattrick</h1>
-      <p>Pastikan tulisanmu memenuhi syarat kebijakan komunitas sebelum mengirim.</p>
-    </section>
-
+  <Navbar />
+<section class="syarat-box">
+  <h1>Kirim Artikel Komunitas Hattrick</h1>
+  <p>Pastikan tulisanmu memenuhi syarat kebijakan komunitas sebelum mengirim:</p>
+  <ul style="margin-top: 10px; padding-left: 20px; color: #57606f; font-size: 14.5px;">
+    <li>Tulisan harus asli (bukan hasil plagiat atau copy-paste dari web lain).</li>
+    <li>Topik wajib seputar game Hattrick, taktik, komunitas, cerpen atau panduan aksesibilitas.</li>
+    <li>Tidak mengandung unsur SARA, ujaran kebencian, atau promosi judi/situs ilegal.</li>
+    <li>Admin berhak menyunting judul atau tata bahasa tanpa mengubah inti tulisan.</li>
+  </ul>
+</section>
     <section class="form-box">
-      <h2>Mulai Menulis</h2>
+      <h2>Isi formulir dibawah ini</h2>
       
       <form id="artikelForm">
         <div class="input-group">
           <label for="nama">Nama Pena / Penulis</label>
-          <input type="text" id="nama" required placeholder="Masukkan nama panggilan atau nama penamu" autocomplete="off">
+          <input type="text" id="nama" required placeholder="Masukkan nama penulis" autocomplete="off">
         </div>
 
         <!-- INPUT TAMBAHAN: KONTAK -->
@@ -35,11 +43,11 @@
 
         <div class="input-group">
           <label for="judul">Usulan Judul Artikel</label>
-          <input type="text" id="judul" required placeholder="Tulis judul bebas sesuai id tulisanmu" autocomplete="off">
+          <input type="text" id="judul" required placeholder="Tulis judul bebas sesuai tulisanmu" autocomplete="off">
         </div>
 
         <div class="input-group">
-          <label for="isi">Isi Artikel / Tulisan Kasar</label>
+          <label for="isi">Isi Artikel / Tulisan</label>
           <textarea id="isi" rows="12" required placeholder="Tulis atau tempel naskah artikelmu secara lengkap di sini..."></textarea>
         </div>
 
@@ -48,6 +56,7 @@
         <button type="submit" id="btnKirim">Kirim Artikel ke Editor</button>
       </form>
     </section>
+    <Navbar />
   </main>
 
   <script>
